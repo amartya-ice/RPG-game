@@ -1,6 +1,6 @@
 #include "Player.h"
 #include<iostream>
-#include "Skeleton.h"
+
 #include "Math.h"
 
 // Ensure sprite is constructed with the texture so a default constructor is not required
@@ -10,6 +10,14 @@ Player::Player() : sprite(texture)
 
 void Player::Initialize()
 {
+    size = sf::Vector2i(64, 64);
+    scale = sf::Vector2i(1, 1);
+ 
+    boundingrectangle.setFillColor(sf::Color::Transparent);
+    boundingrectangle.setOutlineColor(sf::Color::Red);
+    boundingrectangle.setOutlineThickness(2);
+
+   
 }
 
 void Player::Load()
@@ -20,9 +28,11 @@ void Player::Load()
     sprite.setTexture(texture);
     int xcordi = 0;
     int ycordi = 0;
-    sprite.setTextureRect(sf::IntRect({ 0 * xcordi,0 * ycordi }, { 64,64 }));
-    sprite.setScale(sf::Vector2f{ 1,1 });
+    sprite.setTextureRect(sf::IntRect({ size.x * xcordi,size.y * ycordi }, { size.x,size.y }));
+    sprite.setScale(sf::Vector2f{ scale});
     sprite.setPosition(sf::Vector2f(800, 800));
+    boundingrectangle.setSize(sf::Vector2f(size.x*scale.x, size.y*scale.y));
+
 }
 
 void Player::Update(Skeleton skeleton)
@@ -48,15 +58,26 @@ void Player::Update(Skeleton skeleton)
 
     for (size_t i = 0; i < bullets.size(); i++) {
         sf::Vector2f bulletDirection = skeleton.sprite.getPosition() - bullets[i].getPosition();
-        bulletDirection = Math::Normalization(bulletDirection);
+        bulletDirection = Math::Normalization(bulletDirection); 
         bullets[i].setPosition(bullets[i].getPosition() + bulletDirection * bulletSpeed);
     }
+
+    boundingrectangle.setPosition(sprite.getPosition());
+
+  
+    if (Math::Diditcollide(sprite.getGlobalBounds(), skeleton.sprite.getGlobalBounds())) {
+        std::cout << "COLLISION"<<iterator++ << std::endl;
+    }
+
 }
 
 void Player::Draw(sf::RenderWindow& window)
 {
+    window.draw(boundingrectangle);
     window.draw(sprite);
     for (size_t i = 0; i < bullets.size(); i++) {
         window.draw(bullets[i]);
     }
+    
+    
 }

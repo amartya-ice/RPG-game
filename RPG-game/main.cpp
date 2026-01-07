@@ -1,7 +1,5 @@
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <math.h>
 #include "Player.h"
 #include "Skeleton.h"
 

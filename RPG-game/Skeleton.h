@@ -6,6 +6,10 @@ class Skeleton
 {
 private:
 	sf::Texture texture;
+	sf::Vector2i size;
+	sf::Vector2i scale;
+	sf::RectangleShape boundingrectangle;
+
 
 public:
 	Skeleton();
