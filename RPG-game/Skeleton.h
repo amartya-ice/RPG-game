@@ -9,6 +9,7 @@ private:
 	sf::Vector2i size;
 	sf::Vector2i scale;
 	sf::RectangleShape boundingrectangle;
+	float speed = 1.0f;
 
 
 public:
@@ -18,6 +19,6 @@ public:
 public:
 	void Initialize();
 	void Load();
-	void Update();
+	void Update(float deltatime);
 	void Draw(sf::RenderWindow& window);
 };

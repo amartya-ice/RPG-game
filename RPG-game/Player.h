@@ -15,6 +15,7 @@ private:
 	sf::Vector2i size;
 	sf::Vector2i scale;
 	int iterator = 0;
+	float speed = 1.0f;
 	
 
 public:
@@ -24,7 +25,7 @@ public:
 public:
 	void Initialize();
 	void Load();
-	void Update(Skeleton skeleton);
+	void Update(Skeleton skeleton,float deltatime);
 	void Draw(sf::RenderWindow& window);
 };
 

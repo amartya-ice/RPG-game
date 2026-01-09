@@ -35,19 +35,19 @@ void Player::Load()
 
 }
 
-void Player::Update(Skeleton skeleton)
+void Player::Update(Skeleton skeleton,float deltatime)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W))
-        sprite.move(sf::Vector2f(0, -1));
+        sprite.move(sf::Vector2f(0, -1) * deltatime * speed);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
-        sprite.move(sf::Vector2f(-1, 0));
+        sprite.move(sf::Vector2f(-1, 0) * deltatime * speed);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S))
-        sprite.move(sf::Vector2f(0, 1));
+        sprite.move(sf::Vector2f(0, 1) * deltatime * speed);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
-        sprite.move(sf::Vector2f(1, 0));
+        sprite.move(sf::Vector2f(1, 0) * deltatime * speed);
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
         bullets.push_back(sf::RectangleShape(sf::Vector2f(10, 50)));
@@ -59,7 +59,7 @@ void Player::Update(Skeleton skeleton)
     for (size_t i = 0; i < bullets.size(); i++) {
         sf::Vector2f bulletDirection = skeleton.sprite.getPosition() - bullets[i].getPosition();
         bulletDirection = Math::Normalization(bulletDirection); 
-        bullets[i].setPosition(bullets[i].getPosition() + bulletDirection * bulletSpeed);
+        bullets[i].setPosition(bullets[i].getPosition() + bulletDirection * bulletSpeed * deltatime);
     }
 
     boundingrectangle.setPosition(sprite.getPosition());

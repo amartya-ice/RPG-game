@@ -29,7 +29,7 @@ void Skeleton::Load(){
 
 }
 
-void Skeleton::Update(){
+void Skeleton::Update(float deltatime){
     boundingrectangle.setPosition(sprite.getPosition());
 }
 
