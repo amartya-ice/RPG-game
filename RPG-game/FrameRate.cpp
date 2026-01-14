@@ -1,10 +1,9 @@
 #include "FrameRate.h"
 #include<iostream>
 
-FrameRate::FrameRate() : FPScounter(font)
+FrameRate::FrameRate() : FPScounter(font) , timer(0) , FPSdisplay(0)
 {
-    timer = 0;
-    FPSdisplay = 0;
+   
 }
 
 void FrameRate::Initialize() {

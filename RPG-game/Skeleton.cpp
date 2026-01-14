@@ -1,8 +1,18 @@
 #include "Skeleton.h"
 #include <iostream>
 
-Skeleton::Skeleton() : sprite(texture)
+Skeleton::Skeleton() : sprite(texture) , health(100) , Healthtext(font)
 {
+}
+
+Skeleton::~Skeleton()
+{
+}
+
+void Skeleton::Changehealth(int hp)
+{
+    health += hp;
+    Healthtext.setString(std::to_string(health));
 }
 
 void Skeleton::Initialize() {
@@ -15,6 +25,16 @@ void Skeleton::Initialize() {
 }
 
 void Skeleton::Load(){
+    if (font.openFromFile("Assets/Fonts/minecraft_font.ttf")) {
+        std::cout << "font loaded" << std::endl;
+    }
+    else {
+        std::cout << "font did not load" << std::endl;
+    }
+    Healthtext.setFont(font);
+    Healthtext.setString(std::to_string(health));
+
+
     if (texture.loadFromFile("Assets/Texture/skeleton/spritesheetskeleton.png")) {
         std::cout << "skeleton texture loaded sucessesfully!" << std::endl;
     }
@@ -30,10 +50,19 @@ void Skeleton::Load(){
 }
 
 void Skeleton::Update(float deltatime){
-    boundingrectangle.setPosition(sprite.getPosition());
+    if (health > 0) {
+        boundingrectangle.setPosition(sprite.getPosition());
+        Healthtext.setPosition(sprite.getPosition());
+    }
+    
+
 }
 
 void Skeleton::Draw(sf::RenderWindow& window){
-    window.draw(sprite);
-    window.draw(boundingrectangle);
-}
+    if (health > 0) {
+        window.draw(sprite);
+        window.draw(boundingrectangle);
+        window.draw(Healthtext);
+    }
+    }
+  

@@ -10,13 +10,18 @@ private:
 	sf::Vector2i scale;
 	sf::RectangleShape boundingrectangle;
 	float speed = 1.0f;
+	
 
+public:
+	sf::Sprite sprite;
+	int health;
+	sf::Font font;
+	sf::Text Healthtext;
 
 public:
 	Skeleton();
-	sf::Sprite sprite;
-
-public:
+	~Skeleton();
+	void Changehealth(int hp);
 	void Initialize();
 	void Load();
 	void Update(float deltatime);

@@ -8,8 +8,8 @@
 int main()
 {
     //------------------------ INITIALIZE --------------------------------------
-    sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "fuck me");
-    //window.setFramerateLimit(60);
+    sf::RenderWindow window(sf::VideoMode({ 1920,1080 }), "fuck me");
+    window.setFramerateLimit(60);
 
     FrameRate framerate;
     framerate.Initialize();
@@ -41,10 +41,12 @@ int main()
                 window.close();
             }
         }
+
+        sf::Vector2f mouseposition = sf::Vector2f(sf::Mouse::getPosition(window));
        
         framerate.Update(deltatime);
         skeleton1.Update(deltatime);
-        player1.Update(skeleton1,deltatime);
+        player1.Update(skeleton1,deltatime,mouseposition);
         //---------------------------- UPDATE ----------------------------------
 
         //---------------------------- DRAW ------------------------------------
