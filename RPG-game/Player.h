@@ -12,7 +12,6 @@ private:
 	sf::Texture texture;
 	std::vector<Bullet> bullets;
 
-	float bulletSpeed = 0.1f;
 	sf::RectangleShape boundingrectangle;
 	sf::Vector2i size;
 	sf::Vector2i scale;

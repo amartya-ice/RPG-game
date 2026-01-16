@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Skeleton.h"
 #include "FrameRate.h"
+#include "Map.h"
 #include <iostream>
 
 int main()
@@ -10,6 +11,9 @@ int main()
     //------------------------ INITIALIZE --------------------------------------
     sf::RenderWindow window(sf::VideoMode({ 1920,1080 }), "fuck me");
     window.setFramerateLimit(60);
+
+    Map map;
+    map.Initialize();
 
     FrameRate framerate;
     framerate.Initialize();
@@ -25,6 +29,7 @@ int main()
     //------------------------ INITIALIZE --------------------------------------
  
     // -------------------------------------------- LOAD -------------------------------------------
+    map.Load();
     framerate.Load();
     player1.Load();
     skeleton1.Load();
@@ -44,6 +49,7 @@ int main()
 
         sf::Vector2f mouseposition = sf::Vector2f(sf::Mouse::getPosition(window));
        
+        map.Update();
         framerate.Update(deltatime);
         skeleton1.Update(deltatime);
         player1.Update(skeleton1,deltatime,mouseposition);
@@ -51,6 +57,7 @@ int main()
 
         //---------------------------- DRAW ------------------------------------
         window.clear(sf::Color::Black);
+        map.Draw(window);
         player1.Draw(window);
         skeleton1.Draw(window);
         framerate.Draw(window);

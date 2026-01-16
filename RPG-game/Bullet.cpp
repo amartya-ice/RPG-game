@@ -11,7 +11,7 @@ Bullet::~Bullet()
 }
 
 
-void Bullet::Initialize(const sf::Vector2f position , sf::Vector2f target , float speed)
+void Bullet::Initialize(const sf::Vector2f& position, const sf::Vector2f& target, float speed)
 {
 	this->speed = speed;
 	rectangleshape.setSize(sf::Vector2f(10, 50));
