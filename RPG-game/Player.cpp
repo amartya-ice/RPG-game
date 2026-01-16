@@ -1,6 +1,5 @@
 #include "Player.h"
 #include<iostream>
-
 #include "Math.h"
 
 // Ensure sprite is constructed with the texture so a default constructor is not required
@@ -51,24 +50,25 @@ void Player::Update(Skeleton& skeleton,float deltatime, sf::Vector2f mousepositi
 
     fireratetimer += deltatime;
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireratetimer > maxfirerate) {
-        bullets.push_back(sf::RectangleShape(sf::Vector2f(10, 50)));
-        bulletDirection.push_back(sf::Vector2f(1,1) )   ;
+        bullets.emplace_back(Bullet());
+        //bulletDirection.push_back(sf::Vector2f(1,1) )   ;
 
         int i = bullets.size() - 1;
-        bullets[i].setPosition(sprite.getPosition());
+        bullets[i].Initialize(sprite.getPosition(), mouseposition, 0.1f);
         fireratetimer = 0;
-        bulletDirection[i] = mouseposition - bullets[i].getPosition();
-        bulletDirection[i] = Math::Normalization(bulletDirection[i]);
+        //bulletDirection[i] = mouseposition - bullets[i].getPosition();
+        //bulletDirection[i] = Math::Normalization(bulletDirection[i]);
     }
     
 
     for (size_t i = 0; i < bullets.size(); i++ ) {
        
-        bullets[i].setPosition(bullets[i].getPosition() + bulletDirection[i] * bulletSpeed * deltatime);
-        
+       // bullets[i].setPosition(bullets[i].getPosition() + bulletDirection[i] * bulletSpeed * deltatime);
+        bullets[i].Update(deltatime);
+
         if (skeleton.health > 0) {
 
-            if (Math::Diditcollide(bullets[i].getGlobalBounds(), skeleton.sprite.getGlobalBounds())) {
+            if (Math::Diditcollide(bullets[i].GetGlobalBounds(), skeleton.sprite.getGlobalBounds())) {
                 skeleton.Changehealth(-10);
                 bullets.erase(bullets.begin() + i);
                 // std::cout << "Skeleton health:" << skeleton.health << std::endl;
@@ -86,7 +86,7 @@ void Player::Draw(sf::RenderWindow& window)
     window.draw(boundingrectangle);
     window.draw(sprite);
     for (size_t i = 0; i < bullets.size(); i++) {
-        window.draw(bullets[i]);
+        bullets[i].Draw(window);
     }
     
     

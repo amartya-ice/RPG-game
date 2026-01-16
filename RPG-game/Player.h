@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp> 
 #include "vector"
 #include "Skeleton.h"
+#include "Bullet.h"
 
 
 
@@ -9,16 +10,14 @@ class Player
 {
 private:
 	sf::Texture texture;
-	std::vector<sf::RectangleShape> bullets;
-	std::vector<sf::Vector2f> bulletDirection;
+	std::vector<Bullet> bullets;
 
 	float bulletSpeed = 0.1f;
 	sf::RectangleShape boundingrectangle;
 	sf::Vector2i size;
 	sf::Vector2i scale;
-	float maxfirerate;
-	float fireratetimer;
-	int iterator = 0;
+	float maxfirerate = 0.f;
+	float fireratetimer = 0.f;
 	float speed = 1.0f;
 	
 

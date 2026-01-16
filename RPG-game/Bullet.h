@@ -4,20 +4,18 @@
 class Bullet
 {
 private:
-	float speed ;
-	sf::Vector2i direction;
-	float maxfirerate;
-	float fireratetimer;
-public:
-	sf::RectangleShape bullet;
-
+	float speed = 0.f;
+	sf::Vector2f direction;
+	sf::RectangleShape rectangleshape;
 public:
 	Bullet();
 	~Bullet();
-	void Initialize();
+	void Initialize(const sf::Vector2f position, sf::Vector2f target, float speed);
 	void Load();
-	void Update(float deltatime, sf::Vector2f mouseposition);
+	void Update(float deltatime);
 	void Draw(sf::RenderWindow& window);
+
+	inline const sf::FloatRect& GetGlobalBounds() { return rectangleshape.getGlobalBounds(); }
 
 };
 
