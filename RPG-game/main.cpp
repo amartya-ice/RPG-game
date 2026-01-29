@@ -11,6 +11,7 @@ int main()
     //------------------------ INITIALIZE --------------------------------------
     sf::RenderWindow window(sf::VideoMode({ 1920,1080 }), "fuck me");
     window.setFramerateLimit(60);
+   // window.setView(window.getDefaultView());
 
     Map map;
     map.Initialize();
